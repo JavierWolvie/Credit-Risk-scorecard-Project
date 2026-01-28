@@ -1,1 +1,73 @@
+#loading the dataset
 
+# Main application data
+app_train = pd.read_csv(r"C:/Users/USER/Desktop/first project/application_train.csv")
+app_test = pd.read_csv(r"C:/Users/USER/Desktop/first project/application_test.csv")
+
+# Other relational tables
+bureau = pd.read_csv(r"C:/Users/USER/Desktop/first project/bureau.csv")
+bureau_balance = pd.read_csv(r"C:/Users/USER/Desktop/first project/bureau_balance.csv")
+prev_app = pd.read_csv(r"C:/Users/USER/Desktop/first project/previous_application.csv")
+pos_cash = pd.read_csv(r"C:/Users/USER/Desktop/first project/POS_CASH_balance.csv")
+installments = pd.read_csv(r"C:/Users/USER/Desktop/first project/installments_payments.csv")
+credit_card = pd.read_csv(r"C:/Users/USER/Desktop/first project/credit_card_balance.csv")
+print("loaded")
+
+# defining aggregation function
+def aggregate_one_to_many(df, group_key, prefix):
+    num_cols = df.select_dtypes(include='number').columns.tolist()
+    cat_cols = df.select_dtypes(include='object').columns.tolist()
+
+    # Remove group key if present
+    if group_key in num_cols:
+        num_cols.remove(group_key)
+    if group_key in cat_cols:
+        cat_cols.remove(group_key)
+
+    agg_dict = {}
+
+    for col in num_cols:
+        agg_dict[col] = ['mean', 'sum', 'max', 'min']
+
+    for col in cat_cols:
+        agg_dict[col] = ['nunique']
+
+    agg = df.groupby(group_key).agg(agg_dict)
+
+    agg.columns = [f"{prefix}_{col}_{stat}" for col, stat in agg.columns]
+    agg.reset_index(inplace=True)
+
+    return agg
+
+#aggregating one to many tables
+bureau_agg = aggregate_one_to_many(bureau, 'SK_ID_CURR', 'BUREAU')
+
+bureau_balance_agg = aggregate_one_to_many(
+    bureau_balance.merge(bureau[['SK_ID_BUREAU', 'SK_ID_CURR']], 
+                          on='SK_ID_BUREAU', how='left'),
+    'SK_ID_CURR',
+    'BB'
+)
+
+prev_app_agg = aggregate_one_to_many(prev_app, 'SK_ID_CURR', 'PREV')
+
+installments_agg = aggregate_one_to_many(installments, 'SK_ID_CURR', 'INST')
+
+credit_card_agg = aggregate_one_to_many(credit_card, 'SK_ID_CURR', 'CC')
+
+pos_cash_agg = aggregate_one_to_many(pos_cash, 'SK_ID_CURR', 'POS')
+
+# merging the tables
+final_df = app_train.copy()
+
+final_df = (
+    final_df
+    .merge(bureau_agg, on='SK_ID_CURR', how='left')
+    .merge(bureau_balance_agg, on='SK_ID_CURR', how='left')
+    .merge(prev_app_agg, on='SK_ID_CURR', how='left')
+    .merge(installments_agg, on='SK_ID_CURR', how='left')
+    .merge(credit_card_agg, on='SK_ID_CURR', how='left')
+    .merge(pos_cash_agg, on='SK_ID_CURR', how='left')
+)
+
+print(final_df.shape)
