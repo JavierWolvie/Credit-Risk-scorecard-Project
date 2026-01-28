@@ -1,1 +1,21 @@
+pandas: For data manipulation and creating loan-related features (e.g., Debt-to-Income ratios).
+numpy: For numerical operations and handling large arrays.
+scikit-learn: The primary library for machine learning, providing tools for data splitting, scaling, and standard models like Logistic Regression. 
+
+Machine Learning Models
+Credit risk projects often benefit from ensemble models that handle non-linear relationships well: 
+xgboost: High-performance gradient boosting; widely used for tabular data.
+lightgbm or catboost: Alternatives to XGBoost that are often faster or better at handling categorical data (like "home ownership status"). 
+
+ Visualization & Reporting
+matplotlib and seaborn: For plotting credit score distributions, correlation heatmaps, and ROC-AUC curves. 
+Sample requirements.txt Template
+
+text
+pandas
+numpy
+scikit-learn
+xgboost
+matplotlib
+seaborn
 
