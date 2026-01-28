@@ -1,1 +1,69 @@
+Credit Risk Analysis Project – Progress Report
+Prepared by: Akau Bior
+Date: 28 January 2026
 
+1. Project Overview
+
+2. Objectives
+Analyze borrower financial and demographic data to understand patterns associated with loan default.
+Perform data validation and cleaning to ensure quality and consistency.
+Conduct exploratory data analysis (EDA) to identify key trends and relationships.
+Engineer features to improve predictive modeling.
+Build and evaluate machine learning models to predict credit default risk.
+Generate actionable business insights to guide lending decisions.
+
+3. Work Completed So Far
+3.1 Data Understanding & Validation
+Collected historical loan application data.
+Identified target variable: loan_default.
+Categorized features into demographic, financial, employment, and loan attributes.
+Detected data inconsistencies, missing values, and outliers.
+Implemented strategies to handle:
+Missing data
+Extreme values in income and credit amount
+Inconsistent employment duration and categorical labels
+3.2 Exploratory Data Analysis (EDA)
+Conducted univariate analysis to examine feature distributions.
+Income and credit amount distributions are right-skewed.
+Most borrowers fall in low-to-medium income brackets.
+Bivariate analysis between features and target:
+Higher income and longer employment duration correlated with lower default probability.
+Certain loan types showed higher default rates.
+Multivariate analysis revealed:
+Combined effect of financial stability indicators strongly predicts default.
+Moderate correlations exist among financial variables.
+3.3 Feature Engineering
+Encoded categorical variables and scaled numerical variables.
+Created new features:
+Income-to-credit ratio
+Annuity-to-income ratio
+Employment stability indicators
+Selected features based on correlation analysis and avoidance of data leakage.
+3.4 Modeling
+Evaluated multiple models: Logistic Regression, Decision Tree, Random Forest, Gradient Boosting.
+Handled class imbalance using stratified sampling and class weighting.
+Split data into train/test sets and applied cross-validation for robust evaluation.
+3.5 Evaluation
+Metrics identified for model evaluation: ROC-AUC, Precision, Recall, F1-score.
+Considered business impact of misclassifications:
+False positives → rejected creditworthy applicants
+False negatives → increased loan defaults
+Early findings indicate financial stability features are strongest predictors.
+3.6 Business Insights
+Key risk drivers identified:
+Low income relative to loan amount
+High annuity burden
+Unstable employment history
+Recommendations:
+Implement risk-based pricing and loan approval thresholds.
+Explore alternative data sources to improve borrower assessment.
+Ethical considerations acknowledged to avoid discrimination in credit decisions.
+
+4. Next Steps
+Complete model training and fine-tuning.
+Evaluate models against test data and business-relevant metrics.
+Prepare deployment strategy with monitoring and retraining guidelines.
+Finalize detailed README.md and documentation for GitHub repository.
+Develop a visual summary of results for presentation to stakeholders.
+5. Conclusion
+So far, the project has achieved strong progress in understanding the dataset, performing thorough validation and EDA, engineering predictive features, and preparing modeling approaches. The next phase will focus on final model development, performance evaluation, and business application recommendations
