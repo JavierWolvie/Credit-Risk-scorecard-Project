@@ -28,8 +28,11 @@ To develop a data-driven credit risk framework that identifies overlooked but cr
 # Criterion of Success
 
 To reduce the rejection of creditworthy applicants by at least 30–40% among customers with thin or non-existent credit histories compared to a traditional credit-history-only baseline.
+
 To lower False Negatives (good borrowers incorrectly declined) by a minimum of 50%, while keeping default risk within acceptable thresholds.
+
 To demonstrate that ignored features (cash-flow stability, rent payment regularity, skill-based stability income, and first time employees) contribute significantly to credit decisions through measurable feature importance.
+
 To increase approved loan volume by 8–12% without a corresponding increase in default rates, reflecting recovered missed lending opportunities.
 
 
