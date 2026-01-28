@@ -1,1 +1,19 @@
+# 1. Data Preprocessing (src/data/)
+Contains scripts to clean and prepare the specific features used in credit scoring (like income, employment length, and past defaults). 
+make_dataset.py: Fetches raw data from databases or CSVs and saves it to a processed folder.
+preprocessing.py: Handles missing values, encodes categorical variables (e.g., "Home Ownership"), and scales numerical features.
 
+# 2. Feature Engineering (src/features/)
+Specific to credit risk, this is where I calculated financial ratios that help predict default. 
+build_features.py: Creates new columns like Debt-to-Income (DTI) ratio, loan-to-income percentage, or credit history length. 
+
+# 3. Model Pipeline (src/models/)
+Contains the logic for training and using your machine learning models (e.g., XGBoost, Logistic Regression). 
+train_model.py: Script to train the model on the processed dataset and save the result as a .pkl or .joblib file.
+predict_model.py: Takes new applicant data and returns a "default" or "no-default" prediction.
+evaluate.py: Calculates industry-standard metrics like ROC-AUC, Precision-Recall, or F1-score. 
+I have not done this sector yet though.
+
+# 4. Visualization & Utilities (src/utils/)
+plots.py: Scripts for generating specialized credit risk charts for model interpretability.
+helpers.py: Small reusable functions for logging or error handling.
